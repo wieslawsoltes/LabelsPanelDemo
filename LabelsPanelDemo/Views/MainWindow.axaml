@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LabelsPanelDemo.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:LabelsPanelDemo.Controls"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
+        x:Class="LabelsPanelDemo.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="LabelsPanelDemo"
+        Width="500" Height="300"
+        WindowStartupLocation="CenterScreen"
+        x:CompileBindings="True" x:DataType="vm:MainWindowViewModel">
+
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+
+  <Border BorderBrush="Black" BorderThickness="1">
+    <ListBox Items="{Binding Labels}" HorizontalAlignment="Left">
+      <ListBox.Styles>
+        <Style Selector="ListBox">
+          <Setter Property="Background" Value="Transparent" />
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="Padding" Value="0" />
+          <Setter Property="BorderBrush" Value="Transparent" />
+          <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="ListBoxItem">
+          <Setter Property="Background" Value="Transparent" />
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="Padding" Value="0" />
+        </Style>
+      </ListBox.Styles>
+      <ListBox.ItemsPanel>
+        <ItemsPanelTemplate>
+          <controls:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
+            <controls:LabelsPanel.EllipsisControl>
+              <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+                <TextBlock Text="..." 
+                           Margin="5" />
+              </Border>
+            </controls:LabelsPanel.EllipsisControl>
+          </controls:LabelsPanel>
+        </ItemsPanelTemplate>
+      </ListBox.ItemsPanel>
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+            <TextBlock Text="{Binding}" 
+                       Margin="5" 
+                       TextTrimming="CharacterEllipsis" 
+                       MaxWidth="120" />
+          </Border>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </Border>
+
+</Window>
