@@ -3,7 +3,7 @@
         xmlns:vm="using:LabelsPanelDemo.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:LabelsPanelDemo.Controls"
+        xmlns:c="clr-namespace:LabelsPanelDemo.Controls"
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
         x:Class="LabelsPanelDemo.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -17,9 +17,9 @@
   </Design.DataContext>
 
   <Border BorderBrush="Black" BorderThickness="1">
-    <ListBox Items="{Binding Labels}" HorizontalAlignment="Left">
-      <ListBox.Styles>
-        <Style Selector="ListBox">
+    <c:LabelsListBox Items="{Binding Labels}" HorizontalAlignment="Left" VerticalAlignment="Center">
+      <c:LabelsListBox.Styles>
+        <Style Selector="c|LabelsListBox">
           <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
           <Setter Property="Background" Value="Transparent" />
           <Setter Property="BorderBrush" Value="Transparent" />
@@ -31,43 +31,19 @@
           <Setter Property="Padding" Value="0" />  
           <Setter Property="Template">
             <ControlTemplate>
-              <!--<Border Name="border"
-                      ClipToBounds="{TemplateBinding ClipToBounds}"
-                      Background="{TemplateBinding Background}"
-                      BorderBrush="{TemplateBinding BorderBrush}"
-                      BorderThickness="{TemplateBinding BorderThickness}"
-                      CornerRadius="{TemplateBinding CornerRadius}">
-                <ScrollViewer Name="PART_ScrollViewer"
-                              HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
-                              VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
-                              AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">-->
-                  <ItemsPresenter Name="PART_ItemsPresenter"
-                                  Items="{TemplateBinding Items}"
-                                  ItemsPanel="{TemplateBinding ItemsPanel}"
-                                  ItemTemplate="{TemplateBinding ItemTemplate}"
-                                  Margin="{TemplateBinding Padding}"
-                                  VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
-                <!--</ScrollViewer>
-              </Border>-->
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
+                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                              Margin="{TemplateBinding Padding}"
+                              VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
             </ControlTemplate>
           </Setter>
         </Style>
-        <Style Selector="ListBoxItem">
-          <Setter Property="Background" Value="Transparent" />
+        <Style Selector="c|LabelControl">
           <Setter Property="Margin" Value="0" />
-          <Setter Property="Padding" Value="0" />
           <Setter Property="Template">
             <ControlTemplate>
-              <!--<ContentPresenter Name="PART_ContentPresenter"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                ContentTemplate="{TemplateBinding ContentTemplate}"
-                                Content="{TemplateBinding Content}"
-                                Padding="{TemplateBinding Padding}"
-                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />-->
               <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
                 <TextBlock Text="{Binding}" 
                            Margin="5" 
@@ -77,17 +53,17 @@
             </ControlTemplate>
           </Setter>
         </Style>
-      </ListBox.Styles>
+      </c:LabelsListBox.Styles>
       <ListBox.ItemsPanel>
         <ItemsPanelTemplate>
-          <controls:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
-            <controls:LabelsPanel.EllipsisControl>
+          <c:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
+            <c:LabelsPanel.EllipsisControl>
               <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
                 <TextBlock Text="..." 
                            Margin="5" />
               </Border>
-            </controls:LabelsPanel.EllipsisControl>
-          </controls:LabelsPanel>
+            </c:LabelsPanel.EllipsisControl>
+          </c:LabelsPanel>
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
       <!--<ListBox.ItemTemplate>
@@ -100,7 +76,7 @@
           </Border>
         </DataTemplate>
       </ListBox.ItemTemplate>-->
-    </ListBox>
+    </c:LabelsListBox>
   </Border>
 
 </Window>
