@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Media;
 
 namespace LabelsPanelDemo.Controls
 {
@@ -12,20 +9,11 @@ namespace LabelsPanelDemo.Controls
         public static readonly StyledProperty<Control?> EllipsisControlProperty =
             AvaloniaProperty.Register<LabelsPanel, Control?>(nameof(EllipsisControl));
 
-        //public static readonly StyledProperty<double> SpacingProperty = 
-        //    AvaloniaProperty.Register<CellPanel, double>(nameof(Spacing));
-
         public Control? EllipsisControl
         {
             get => GetValue(EllipsisControlProperty);
             set => SetValue(EllipsisControlProperty, value);
         }
-
-        //public double Spacing
-        //{
-        //    get => GetValue(SpacingProperty);
-        //    set => SetValue(SpacingProperty, value);
-        //}
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
@@ -41,62 +29,36 @@ namespace LabelsPanelDemo.Controls
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            // Debug.WriteLine($"[MeasureOverride] availableSize='{availableSize}', Children='{Children.Count}'");
-
             var ellipsis = 0.0;
             if (EllipsisControl is { })
             {
                 EllipsisControl.Measure(availableSize);
                 ellipsis = EllipsisControl.DesiredSize.Width;
             }
-            /*
-            var width = 0.0;
-            var height = 0.0;
 
-            foreach (var child in Children)
-            {
-                child.Measure(availableSize);
-                width += child.DesiredSize.Width + Spacing;
-                height = Math.Max(height, child.DesiredSize.Height);
-            }
-
-            width += ellipsis;
-
-            var size = new Size(availableSize.Width, height);
-
-            Debug.WriteLine($"[MeasureOverride] size='{size}', Children='{Children.Count}'");
-            */
-            //return base.MeasureOverride(size);
-            //return size;
-            //return base.MeasureOverride(availableSize);
             return base.MeasureOverride(availableSize.WithWidth(availableSize.Width + ellipsis));
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            //Debug.WriteLine($"[ArrangeOverride] availableSize='{finalSize}', Children='{Children.Count}'");
-
             var spacing = Spacing;
-            //var spacing = 0.0;
-            
             var ellipsisWidth = 0.0;
+            var width = 0.0;
+            var height = 0.0;
+            var finalWidth = finalSize.Width;
+            var showEllipsis = false;
+            var totalChildren = Children.Count;
+            var count = 0;
+
             if (EllipsisControl is { })
             {
                 ellipsisWidth = EllipsisControl.DesiredSize.Width;
             }
 
-            var width = 0.0;
-            var height = 0.0;
-
-            var finalWidth = finalSize.Width;
-
-            bool showEllipsis = false;
-            int totalChildren = Children.Count;
-            int count = 0;
             for (var i = 0; i < totalChildren; i++)
             {
                 var child = Children[i];
-                var childWidth = child.DesiredSize.Width /* + spacing */;
+                var childWidth = child.DesiredSize.Width;
 
                 if (width + childWidth > finalWidth)
                 {
@@ -137,22 +99,18 @@ namespace LabelsPanelDemo.Controls
             }
 
             var offset = 0.0;
+
             for (var i = 0; i < totalChildren; i++)
             {
                 var child = Children[i];
                 if (i < count)
                 {
-                    //if (!child.IsVisible)
-                    //{
-                    //    child.IsVisible = true;
-                    //}
                     var rect = new Rect(offset, 0.0, child.DesiredSize.Width, height);
                     child.Arrange(rect);
                     offset += child.DesiredSize.Width + spacing;
                 }
                 else
                 {
-                    //child.IsVisible = false;
                     child.Arrange(new Rect(-10000, -10000, 0, 0));
                 }
             }
@@ -160,27 +118,17 @@ namespace LabelsPanelDemo.Controls
             if (EllipsisControl is { })
             {
                 if (showEllipsis)
-                {                    
-                    //if (!EllipsisControl.IsVisible)
-                    //{
-                    //    EllipsisControl.IsVisible = true;
-                    //}
+                {
                     var rect = new Rect(offset, 0.0, EllipsisControl.DesiredSize.Width, height);
                     EllipsisControl.Arrange(rect);
                 }
                 else
                 {
                     EllipsisControl.Arrange(new Rect(-10000, -10000, 0, 0));
-                    //EllipsisControl.IsVisible = false;
                 }
             }
 
-            var size = new Size(width, height);
-            //Debug.WriteLine($"[ArrangeOverride] size='{size}', count='{count}'");
-
-            return size;
-            // return base.ArrangeOverride(size);
-            // return base.ArrangeOverride(finalSize);
+            return new Size(width, height);
         }
     }
 }

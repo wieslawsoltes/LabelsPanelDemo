@@ -16,51 +16,10 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
 
-  <Window.Styles>
-    <Style Selector="c|LabelsListBox">
-      <Setter Property="Template">
-        <ControlTemplate>
-          <ScrollViewer Name="PART_ScrollViewer"
-                        HorizontalScrollBarVisibility="Disabled"
-                        VerticalScrollBarVisibility="Auto"
-                        AllowAutoHide="False">
-              <ItemsPresenter Name="PART_ItemsPresenter"
-                              Items="{TemplateBinding Items}"
-                              Margin="0"
-                              VirtualizationMode="Simple">
-                <ItemsPresenter.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <c:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
-                      <c:LabelsPanel.EllipsisControl>
-                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
-                          <TextBlock Text="..." Margin="5" />
-                        </Border>
-                      </c:LabelsPanel.EllipsisControl>
-                    </c:LabelsPanel>
-                  </ItemsPanelTemplate>
-                </ItemsPresenter.ItemsPanel>
-              </ItemsPresenter>
-            </ScrollViewer>
-        </ControlTemplate>
-      </Setter>
-    </Style>
-    <Style Selector="c|LabelControl">
-      <Setter Property="Margin" Value="0" />
-      <Setter Property="Template">
-        <ControlTemplate>
-          <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
-            <TextBlock Text="{Binding}" 
-                       Margin="5" 
-                       TextTrimming="CharacterEllipsis" 
-                       MaxWidth="120" />
-          </Border>
-        </ControlTemplate>
-      </Setter>
-    </Style>
-  </Window.Styles>
-
   <Border BorderBrush="Black" BorderThickness="1">
-    <c:LabelsListBox Items="{Binding Labels}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+    <c:LabelsListBox Items="{Binding Labels}" 
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Center"/>
   </Border>
 
 </Window>
