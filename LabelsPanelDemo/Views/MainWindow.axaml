@@ -20,16 +20,62 @@
     <ListBox Items="{Binding Labels}" HorizontalAlignment="Left">
       <ListBox.Styles>
         <Style Selector="ListBox">
+          <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
           <Setter Property="Background" Value="Transparent" />
-          <Setter Property="Margin" Value="0" />
-          <Setter Property="Padding" Value="0" />
           <Setter Property="BorderBrush" Value="Transparent" />
           <Setter Property="BorderThickness" Value="0" />
+          <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+          <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />        
+          <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />  
+          <Setter Property="Margin" Value="0" />
+          <Setter Property="Padding" Value="0" />  
+          <Setter Property="Template">
+            <ControlTemplate>
+              <!--<Border Name="border"
+                      ClipToBounds="{TemplateBinding ClipToBounds}"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="{TemplateBinding CornerRadius}">
+                <ScrollViewer Name="PART_ScrollViewer"
+                              HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
+                              VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
+                              AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">-->
+                  <ItemsPresenter Name="PART_ItemsPresenter"
+                                  Items="{TemplateBinding Items}"
+                                  ItemsPanel="{TemplateBinding ItemsPanel}"
+                                  ItemTemplate="{TemplateBinding ItemTemplate}"
+                                  Margin="{TemplateBinding Padding}"
+                                  VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
+                <!--</ScrollViewer>
+              </Border>-->
+            </ControlTemplate>
+          </Setter>
         </Style>
         <Style Selector="ListBoxItem">
           <Setter Property="Background" Value="Transparent" />
           <Setter Property="Margin" Value="0" />
           <Setter Property="Padding" Value="0" />
+          <Setter Property="Template">
+            <ControlTemplate>
+              <!--<ContentPresenter Name="PART_ContentPresenter"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                Padding="{TemplateBinding Padding}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />-->
+              <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+                <TextBlock Text="{Binding}" 
+                           Margin="5" 
+                           TextTrimming="CharacterEllipsis" 
+                           MaxWidth="120" />
+              </Border>
+            </ControlTemplate>
+          </Setter>
         </Style>
       </ListBox.Styles>
       <ListBox.ItemsPanel>
@@ -44,7 +90,7 @@
           </controls:LabelsPanel>
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
-      <ListBox.ItemTemplate>
+      <!--<ListBox.ItemTemplate>
         <DataTemplate>
           <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
             <TextBlock Text="{Binding}" 
@@ -53,7 +99,7 @@
                        MaxWidth="120" />
           </Border>
         </DataTemplate>
-      </ListBox.ItemTemplate>
+      </ListBox.ItemTemplate>-->
     </ListBox>
   </Border>
 
