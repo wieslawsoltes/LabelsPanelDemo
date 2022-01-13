@@ -12,7 +12,7 @@ namespace LabelsPanelDemo.ViewModels
         {
             Labels = new List<string>();
 
-            for (var i = 0; i < 20; i++)
+            for (var i = 0; i < 200; i++)
             {
                 Labels.Add($"Label {i}");
             }
