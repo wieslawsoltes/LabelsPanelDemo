@@ -71,16 +71,6 @@
           </c:LabelsPanel>
         </ItemsPanelTemplate>
       </ListBox.ItemsPanel>
-      <!--<ListBox.ItemTemplate>
-        <DataTemplate>
-          <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
-            <TextBlock Text="{Binding}" 
-                       Margin="5" 
-                       TextTrimming="CharacterEllipsis" 
-                       MaxWidth="120" />
-          </Border>
-        </DataTemplate>
-      </ListBox.ItemTemplate>-->
     </c:LabelsListBox>
   </Border>
 
