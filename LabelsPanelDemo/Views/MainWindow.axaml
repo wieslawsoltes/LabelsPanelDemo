@@ -16,62 +16,51 @@
     <vm:MainWindowViewModel />
   </Design.DataContext>
 
+  <Window.Styles>
+    <Style Selector="c|LabelsListBox">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <ScrollViewer Name="PART_ScrollViewer"
+                        HorizontalScrollBarVisibility="Disabled"
+                        VerticalScrollBarVisibility="Auto"
+                        AllowAutoHide="False">
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              Margin="0"
+                              VirtualizationMode="Simple">
+                <ItemsPresenter.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <c:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
+                      <c:LabelsPanel.EllipsisControl>
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+                          <TextBlock Text="..." Margin="5" />
+                        </Border>
+                      </c:LabelsPanel.EllipsisControl>
+                    </c:LabelsPanel>
+                  </ItemsPanelTemplate>
+                </ItemsPresenter.ItemsPanel>
+              </ItemsPresenter>
+            </ScrollViewer>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <Style Selector="c|LabelControl">
+      <Setter Property="Margin" Value="0" />
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
+            <TextBlock Text="{Binding}" 
+                       Margin="5" 
+                       TextTrimming="CharacterEllipsis" 
+                       MaxWidth="120" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+  </Window.Styles>
+
   <Border BorderBrush="Black" BorderThickness="1">
-    <c:LabelsListBox Items="{Binding Labels}" HorizontalAlignment="Left" VerticalAlignment="Center">
-      <c:LabelsListBox.Styles>
-        <Style Selector="c|LabelsListBox">
-          <Setter Property="TextBlock.Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}" />
-          <Setter Property="Background" Value="Transparent" />
-          <Setter Property="BorderBrush" Value="Transparent" />
-          <Setter Property="BorderThickness" Value="0" />
-          <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
-          <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />        
-          <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />  
-          <Setter Property="Margin" Value="0" />
-          <Setter Property="Padding" Value="0" />  
-          <Setter Property="Template">
-            <ControlTemplate>
-              <ScrollViewer Name="PART_ScrollViewer"
-                            HorizontalScrollBarVisibility="{TemplateBinding (ScrollViewer.HorizontalScrollBarVisibility)}"
-                            VerticalScrollBarVisibility="{TemplateBinding (ScrollViewer.VerticalScrollBarVisibility)}"
-                            AllowAutoHide="{TemplateBinding (ScrollViewer.AllowAutoHide)}">
-                  <ItemsPresenter Name="PART_ItemsPresenter"
-                                  Items="{TemplateBinding Items}"
-                                  ItemsPanel="{TemplateBinding ItemsPanel}"
-                                  ItemTemplate="{TemplateBinding ItemTemplate}"
-                                  Margin="{TemplateBinding Padding}"
-                                  VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
-                </ScrollViewer>
-            </ControlTemplate>
-          </Setter>
-        </Style>
-        <Style Selector="c|LabelControl">
-          <Setter Property="Margin" Value="0" />
-          <Setter Property="Template">
-            <ControlTemplate>
-              <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
-                <TextBlock Text="{Binding}" 
-                           Margin="5" 
-                           TextTrimming="CharacterEllipsis" 
-                           MaxWidth="120" />
-              </Border>
-            </ControlTemplate>
-          </Setter>
-        </Style>
-      </c:LabelsListBox.Styles>
-      <ListBox.ItemsPanel>
-        <ItemsPanelTemplate>
-          <c:LabelsPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Left">
-            <c:LabelsPanel.EllipsisControl>
-              <Border BorderBrush="Black" BorderThickness="1" CornerRadius="2">
-                <TextBlock Text="..." 
-                           Margin="5" />
-              </Border>
-            </c:LabelsPanel.EllipsisControl>
-          </c:LabelsPanel>
-        </ItemsPanelTemplate>
-      </ListBox.ItemsPanel>
-    </c:LabelsListBox>
+    <c:LabelsListBox Items="{Binding Labels}" HorizontalAlignment="Left" VerticalAlignment="Center"/>
   </Border>
 
 </Window>
